@@ -17,7 +17,7 @@ class ChatViewController: UIViewController {
     var messages: [Message] = [
         Message(sender: "user1@gmail.com", body: "Hay...."),
         Message(sender: "user2@gmail.com", body: "Hello...."),
-        Message(sender: "user1@gmail.com", body: "I am usr 1")
+        Message(sender: "user1@gmail.com", body: "Maybe ami onek kisu plan korchi and kuje kuje bar o kortechi but hbe ki na jani na.Amni sir ra je vabe bole 15 din a app developer hole vlo hoi tader")
     ]
     
     override func viewDidLoad() {
@@ -25,6 +25,7 @@ class ChatViewController: UIViewController {
         title = "⚡️FlashChat"
         navigationItem.hidesBackButton = true
         tableView.dataSource = self
+        tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -52,7 +53,8 @@ extension ChatViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath)
-        cell.textLabel?.text = messages[indexPath.row].body
+        as! MessageCell
+        cell.lable.text = messages[indexPath.row].body
         return cell
     }
     
