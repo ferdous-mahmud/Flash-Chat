@@ -18,7 +18,6 @@ class MessageCell: UITableViewCell {
         super.awakeFromNib()
         
         messageBouble.layer.cornerRadius = messageBouble.frame.size.height / 5
-        messageBouble.frame.width = est
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
