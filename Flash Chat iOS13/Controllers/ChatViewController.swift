@@ -15,11 +15,7 @@ class ChatViewController: UIViewController {
     
     let db = Firestore.firestore()
     
-    var messages: [Message] = [
-        Message(sender: "user1@gmail.com", body: "Hay...."),
-        Message(sender: "user2@gmail.com", body: "Hello...."),
-        Message(sender: "user1@gmail.com", body: "Maybe ami onek kisu plan korchi and kuje kuje bar o kortechi but hbe ki na jani na.Amni sir ra je vabe bole 15 din a app developer hole vlo hoi tader")
-    ]
+    var messages: [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +23,38 @@ class ChatViewController: UIViewController {
         navigationItem.hidesBackButton = true
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
+    
+        
+        loadMessages()
+    }
+    
+    func loadMessages(){
+        
+        db.collection(K.FStore.collectionName)
+            .order(by: K.FStore.dateField)
+            .addSnapshotListener { (querySnapshot, error) in
+            self.messages = []
+            
+            if let err = error {
+                print("Error getting documents: \(err)")
+            } else {
+                if let snapshortDocuments = querySnapshot?.documents {
+                    for doc in snapshortDocuments {
+                        let data = doc.data()
+                        
+                        if let messageSender = data[K.FStore.senderField] as? String, let messageBody = data[K.FStore.bodyField] as? String {
+                            
+                            let newMessage = Message(sender: messageSender, body: messageBody)
+                            self.messages.append(newMessage)
+
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func sendPressed(_ sender: UIButton) {
@@ -34,27 +62,16 @@ class ChatViewController: UIViewController {
         if let messageData = messageTextfield.text, let user = Auth.auth().currentUser?.email{
             db.collection(K.FStore.collectionName).addDocument(data: [
                 K.FStore.senderField: user,
-                K.FStore.dateField: messageData
+                K.FStore.bodyField: messageData,
+                K.FStore.dateField: Date().timeIntervalSince1970
             ]) { err in
                 if let err = err {
                     print("Error adding document: \(err)")
                 } else {
-                    print("Document added")
+                    self.messageTextfield.text = ""
                 }
             }
         
-        }
-        
-        
-        //
-        db.collection(K.FStore.collectionName).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                }
-            }
         }
     }
     
