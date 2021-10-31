@@ -13,17 +13,17 @@
 
 ### Screen Shots (H.W - 2 - ByteCoin)
 
-<img src="https://user-images.githubusercontent.com/62091371/136700336-e9159ca1-f206-44df-a5b4-6e9c4056314c.png" width="428" height="926" alt="ByteCoin Lite Mode">.<img src="https://user-images.githubusercontent.com/62091371/136700337-09964440-c6aa-42a8-afe6-d6246beace53.png" width="428" height="926" alt="ByteCoin Dark Mode">
-<img src="https://user-images.githubusercontent.com/62091371/136700326-4b941ff2-e87e-48e4-8859-d420f35b0ad7.gif" width="428" height="926" alt="ByteCoin gif">
+<img src="https://user-images.githubusercontent.com/62091371/139575115-fe0e78d9-cd34-4d79-8ebd-8a9ad858efd0.png" width="250"   alt="Welcome Screen">.<img src="https://user-images.githubusercontent.com/62091371/139575116-18197334-895d-4598-891b-caa469a15312.png" width="250" alt="Login Screen">
+<img src="https://user-images.githubusercontent.com/62091371/139575107-b168631f-be2f-4c46-a730-95aa768e4f41.png" width="250" alt="Register Screen">.<img src="https://user-images.githubusercontent.com/62091371/139575112-88a85f09-2b48-47df-97d4-103ed8826ef6.png" width="250" alt="Chat Screen">
 
 ---
 
 ## Description
 
-- A simple Bitcoin price tracker app!
-
-- Show Bitcoin price in different currency
-
+- User Register
+- User Login
+- A simple chat app using Firebase!
+- Chat between two or multiple person at a time
 - MVC design pattern
 
 #### Frameworks
