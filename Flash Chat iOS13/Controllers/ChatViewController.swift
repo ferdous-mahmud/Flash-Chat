@@ -23,8 +23,7 @@ class ChatViewController: UIViewController {
         navigationItem.hidesBackButton = true
         tableView.dataSource = self
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
-    
-        
+
         loadMessages()
     }
     
@@ -85,15 +84,14 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func logOutButtonTapped(_ sender: UIBarButtonItem) {
-    do {
-        try Auth.auth().signOut()
-        
-        // Navigate to WelcomeViewController
-        navigationController?.popToRootViewController(animated: true)
-    } catch let signOutError as NSError {
-        print("Error signing out: %@", signOutError)
-    }
-      
+        do {
+            try Auth.auth().signOut()
+            
+            // Navigate to WelcomeViewController
+            navigationController?.popToRootViewController(animated: true)
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
     
 }
